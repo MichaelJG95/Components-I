@@ -1,4 +1,4 @@
-import './Menu.less'
+import './menu.less'
 
 // This is the data we will be using, study it but don't change anything, yet.
 let menuItems = [
@@ -32,3 +32,34 @@ let menuItems = [
 
   Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
 */
+const header = document.querySelector(".header");
+
+function menuMaker(menuItems){
+  const menuDiv = document.createElement("div");
+  const ul = document.createElement("ul");
+  const lis = menuItems.map(item => {
+    return document.createElement("li");
+  })
+  menuItems.forEach((item, idx) => {
+    lis[idx].textContent = item;
+  })
+
+  menuDiv.appendChild(ul);
+  lis.forEach(li => {
+    
+    ul.appendChild(li);
+  })
+
+  menuDiv.classList.add("menu");
+
+  const menuButton = document.querySelector(".menu-button");
+
+  menuButton.addEventListener("click", event => {
+    menuDiv.classList.toggle("menu--open");
+  })
+
+  return menuDiv;
+}
+
+const menu = menuMaker(menuItems);
+header.appendChild(menu);
